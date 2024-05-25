@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "person.hpp"
+#include "MyArray.hpp"
 
 using namespace std;
 
@@ -40,7 +41,7 @@ void mySort(T arr[], int len)
 			mySwap(arr[max], arr[i]);
 		}
 	}
-	
+
 }
 
 //打印数组
@@ -79,7 +80,7 @@ bool myCompare(T& a, T& b)
 template<> bool myCompare(Person& p1, Person& p2)
 {
 	return (p1.name == p2.name && p1.age == p2.age);
-	
+
 }
 
 //类模板
@@ -275,8 +276,40 @@ public:
 	friend void printPerson2<>(Person5<T1, T2>& p);
 };
 
+//类模板案例
+//打印数组
+void printIntArray(MyArray<int>& arr)
+{
+	for (int i = 0; i < arr.getSize(); i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
 
+//测试自定义数据类型
+class Person6
+{
+public:
+	string name;
+	int age;
 
+public:
+	Person6() {}
+	Person6(string name, int age)
+	{
+		this->name = name;
+		this->age = age;
+	}
+};
+
+void printPersonArray(MyArray<Person6>& personArr)
+{
+	for (int i = 0; i < personArr.getSize(); i++)
+	{
+		cout << "姓名： " << personArr[i].name << "   年龄： " << personArr[i].age << endl;
+	}
+}
 
 void test01()
 {
@@ -369,7 +402,7 @@ void test09()
 	MyClass<Person2> m;
 	//m.func1();
 	m.func2();
-	
+
 }
 
 void test10()
@@ -420,7 +453,53 @@ void test17()
 	printPerson2(p);
 }
 
-void f(int a) { cout << a << endl; }
+//测试内置()
+//数据类型
+void test18()
+{
+	MyArray<int> array1(10);
+	for (int i = 0; i < 10; i++)
+	{
+		array1.pushBack(i);
+	}
+	cout << "array1打印输出： " << endl;
+	printIntArray(array1);
+	cout << "array1的大小： " << array1.getSize() << endl;
+	cout << "array1的容量： " << array1.getCapacity() << endl;
+
+	cout << "--------------------------------------------" << endl;
+
+	MyArray<int> array2(array1);
+	array2.popBack();
+	cout << "array2打印输出： " << endl;
+	printIntArray(array2);
+	cout << "array2的大小： " << array2.getSize() << endl;
+	cout << "array2的容量： " << array2.getCapacity() << endl;
+}
+
+//测试自定义数据类型
+void test19()
+{
+	//创建数组
+	MyArray<Person6> personArray(10);
+	Person6 p1("韩信", 11);
+	Person6 p2("猴子", 22);
+	Person6 p3("李白", 33);
+	Person6 p4("妲己", 44);
+	Person6 p5("安琪拉", 55);
+
+	//插入数据
+	personArray.pushBack(p1);
+	personArray.pushBack(p2);
+	personArray.pushBack(p3);
+	personArray.pushBack(p4);
+	personArray.pushBack(p5);
+
+	printPersonArray(personArray);
+
+	cout << "personArray的大小： " << personArray.getSize() << endl;
+	cout << "personArray的容量： " << personArray.getCapacity() << endl;
+}
 
 int main()
 {
@@ -441,7 +520,8 @@ int main()
 	//test15();
 	//test16();
 	//test17();
-	f(3);
+	//test18();
+	test19();
 
 	return 0;
 }

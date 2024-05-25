@@ -23,5 +23,8 @@
     <ClInclude Include="person.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MyArray.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
