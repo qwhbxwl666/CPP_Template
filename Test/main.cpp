@@ -420,6 +420,8 @@ void test17()
 	printPerson2(p);
 }
 
+void f(int a) { cout << a << endl; }
+
 int main()
 {
 	//test01();
@@ -437,9 +439,9 @@ int main()
 	//test13();
 	//test14();
 	//test15();
-	test16();
-	test17();
-
+	//test16();
+	//test17();
+	f(3);
 
 	return 0;
 }
